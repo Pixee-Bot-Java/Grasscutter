@@ -16,6 +16,7 @@ import emu.grasscutter.scripts.data.controller.EntityController;
 import emu.grasscutter.server.event.entity.*;
 import emu.grasscutter.server.packet.send.PacketEntityFightPropUpdateNotify;
 import it.unimi.dsi.fastutil.ints.*;
+import java.security.SecureRandom;
 import java.util.*;
 import lombok.*;
 
@@ -288,7 +289,7 @@ public abstract class GameEntity {
                     int weightCount = 0;
                     for (var entry : dropTableEntry.getDropVec()) weightCount += entry.getWeight();
 
-                    int randomValue = new Random().nextInt(weightCount);
+                    int randomValue = new SecureRandom().nextInt(weightCount);
 
                     weightCount = 0;
                     for (var entry : dropTableEntry.getDropVec()) {
@@ -296,7 +297,7 @@ public abstract class GameEntity {
                             var countRange = parseCountRange(entry.getCountRange());
                             itemsToDrop.put(
                                     entry.getItemId(),
-                                    Integer.valueOf((new Random().nextBoolean() ? countRange[0] : countRange[1])));
+                                    Integer.valueOf((new SecureRandom().nextBoolean() ? countRange[0] : countRange[1])));
                         }
                     }
                 }
@@ -304,11 +305,11 @@ public abstract class GameEntity {
             case 1: // Select various
                 {
                     for (var entry : dropTableEntry.getDropVec()) {
-                        if (entry.getWeight() < new Random().nextInt(10000)) {
+                        if (entry.getWeight() < new SecureRandom().nextInt(10000)) {
                             var countRange = parseCountRange(entry.getCountRange());
                             itemsToDrop.put(
                                     entry.getItemId(),
-                                    Integer.valueOf((new Random().nextBoolean() ? countRange[0] : countRange[1])));
+                                    Integer.valueOf((new SecureRandom().nextBoolean() ? countRange[0] : countRange[1])));
                         }
                     }
                 }
